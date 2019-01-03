@@ -34,6 +34,8 @@
 |26| [What are template statements?](#what-are-template-statements)|
 |27| [How do you categorize data binding types?](#how-do-you-categorize-data-binding-types)|
 |28| [What are pipes?](#what-are-pipes)|
+|29| [What is a parameterized pipe?](#what-is-a-parameterized-pipe)|
+|30| [How do you chain pipes?](#how-do-you-chain-pipes)|
 
 1. ### What is Angular Framework?
 
@@ -465,7 +467,34 @@
       birthday = new Date(1987, 6, 18); // June 18, 1987
     }
     ```
+29. ### What is a parameterized pipe?
+    A pipe can accept any number of optional parameters to fine-tune its output. The parameterized pipe can be created by declaring the pipe name with a colon ( : ) and then the parameter value. If the pipe accepts multiple parameters, separate the values with colons. Let's take a birthday example with a particular format(dd/mm/yyyy):
+    ```javascript
+    import { Component } from '@angular/core';
 
+        @Component({
+          selector: 'app-birthday',
+          template: `<p>Birthday is {{ birthday | date | 'dd/mm/yyyy'}}</p>` // 18/06/1987
+        })
+        export class BirthdayComponent {
+          birthday = new Date(1987, 6, 18);
+        }
+    ```
+    **Note:** The parameter value can be any valid template expression, such as a string literal or a component property.
+30. ### How do you chain pipes?
+    You can chain pipes together in potentially useful combinations as per the needs. Let's take a birthday property which uses date pipe(along with parameter) and uppercase pipes as below
+    ```javascript
+    import { Component } from '@angular/core';
+
+            @Component({
+              selector: 'app-birthday',
+              template: `<p>Birthday is {{  birthday | date:'fullDate' | uppercase}} </p>` // THURSDAY, JUNE 18, 1987
+            })
+            export class BirthdayComponent {
+              birthday = new Date(1987, 6, 18);
+            }
+
+    ```
 
 
 
